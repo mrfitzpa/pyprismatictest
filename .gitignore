@@ -14,12 +14,12 @@ pages/
 input-files/
 output-files/
 notebooks/
-examples/
 
 # Ignore select files.
 .coverage
 .python-version
-prismatique/version.py
+pyprismatictest/_version.py
+pyprismatictest/version.py
 tests/coverage.json
 scratch_param.txt
 _temp_scan_config_file.txt

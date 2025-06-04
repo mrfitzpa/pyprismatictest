@@ -16,26 +16,23 @@
 
 
 # The current script tests Digital Research Alliance of Canada's wheel of
-# ``PyPrismatic_cpu`` for Python 3.12.
+# ``PyPrismatic_gpu`` for Python 3.12.
 
 
 
 #SBATCH --job-name=test_cpu_version_of_pyprismatic_for_py312
 #SBATCH --nodes=1
-#SBATCH --cpus-per-task=1  # CPU cores/threads
-#SBATCH --mem=4G           # CPU memory per node
-#SBATCH --time=00-00:30    # time (DD-HH:MM)
+#SBATCH --cpus-per-task=1        # CPU cores/threads
+#SBATCH --gpus-per-node=v100l:1  # GPU type and number of GPUs per node.
+#SBATCH --mem=4G                 # CPU memory per node
+#SBATCH --time=00-00:30          # time (DD-HH:MM)
 #SBATCH --mail-type=ALL
 
-# Parse the command line arguments.
-path_to_dir_containing_current_script=${1}
-path_to_repo_root=${2}
-path_to_data_dir_1=${3}
-overwrite_slurm_tmpdir=${4}
-
 # Get the path to the root of the repository.
-path_to_dir_containing_current_script=\
-$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+path_to_current_script=\
+$(scontrol show job "$SLURM_JOB_ID" | awk -F= '/Command=/{print $2}')
+
+path_to_dir_containing_current_script=$(dirname ${path_to_current_script})
 
 path_to_repo_root=$(dirname ${path_to_dir_containing_current_script})
 
@@ -52,6 +49,8 @@ source ${path_to_repo_root}/${basename} ${SLURM_TMPDIR}/tempenv false
 
 
 # Run test.
+cd ${SLURM_TMPDIR}
+
 pyprismatictest
 python_script_exit_code=$?
 

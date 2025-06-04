@@ -96,14 +96,15 @@ then
 
     
 
-    # Install ``pyprismatic``.
+    # Install dependencies of ``pyprismatictest``.
     if [ "${install_gpu_version_of_pyprismatic}" = true ]
     then
 	pyprismatic_pkg="pyprismatic-gpu"
     else
 	pyprismatic_pkg="pyprismatic-cpu"
     fi
-    pip install --no-index ${pyprismatic_pkg}
+    pkgs="h5py scipy "${pyprismatic_pkg}
+    pip install --no-index ${pkgs}
 else
     # Parse the command line arguments.
     if [ $# -eq 0 ]
@@ -179,4 +180,5 @@ fi
 
 
 # Install ``pyprismatictest``.
+cd ${path_to_repo_root}
 pip install .
