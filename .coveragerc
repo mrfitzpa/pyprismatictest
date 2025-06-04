@@ -1,0 +1,20 @@
+[paths]
+source =
+    ../pyprismatictest
+    */site-packages/pyprismatictest
+
+[run]
+branch = true
+source =
+    pyprismatictest
+    .
+omit =
+    */pyprismatictest/version.py
+
+[report]
+show_missing = true
+precision = 2
+
+exclude_also =
+    if __name__ == .__main__.:
+    except BaseException as err:

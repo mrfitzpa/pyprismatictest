@@ -1,0 +1,66 @@
+[build-system]
+requires = ["setuptools", "wheel", "setuptools_scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyprismatictest"
+dynamic = ["version"]
+description = """
+Python library for quickly testing the installation of the Python library \
+``pyprismatic``.
+"""
+readme = "README.md"
+authors = [
+    {name = "Matthew Fitzpatrick", email = "matthew.rc.fitzpatrick@gmail.com"}
+]
+classifiers = [
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Natural Language :: English"
+]
+keywords = [
+    "prismatic",
+    "pyprismatic",
+    "multislice",
+    "CBED",
+    "STEM",
+    "HRTEM",
+    "GPU",
+    "prismatic",
+    "pyprismatic",
+    "microscopy",
+    "electron beam",
+    "electron probe"
+]
+dependencies = [
+    "numpy>=1.13.0"
+]
+requires-python = ">=3.8"
+
+[project.optional-dependencies]
+tests = [
+    "pytest-cov"
+]
+all = [
+    "pyprismatictest[tests]"
+]
+
+[project.urls]
+Homepage = "https://mrfitzpa.github.io/pyprismatictest"
+Repository = "https://github.com/mrfitzpa/pyprismatictest"
+
+[tool.setuptools_scm]
+write_to = "pyprismatictest/version.py"
+version_scheme = "guess-next-dev"
+
+[project.scripts]
+pyprismatictest = "pyprismatictest:_test_pyprismatic"
